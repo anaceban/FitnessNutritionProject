@@ -1,0 +1,10 @@
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\bin\Debug\netstandard2.0\ApplicationFitness.dll.config
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\bin\Debug\netstandard2.0\ApplicationFitness.deps.json
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\bin\Debug\netstandard2.0\ApplicationFitness.dll
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\bin\Debug\netstandard2.0\ApplicationFitness.pdb
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\obj\Debug\netstandard2.0\ApplicationFitness.csprojAssemblyReference.cache
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\obj\Debug\netstandard2.0\ApplicationFitness.AssemblyInfoInputs.cache
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\obj\Debug\netstandard2.0\ApplicationFitness.AssemblyInfo.cs
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\obj\Debug\netstandard2.0\ApplicationFitness.csproj.CoreCompileInputs.cache
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\obj\Debug\netstandard2.0\ApplicationFitness.dll
+C:\Users\ana.ceban\source\repos\ApplicationFitness\ApplicationFitness.Domain\obj\Debug\netstandard2.0\ApplicationFitness.pdb

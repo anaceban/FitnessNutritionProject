@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\ana.ceban\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\ana.ceban\\.nuget\\packages"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+export default interface User{
+    id: number,
+    firstName: string,
+    lastName: string, 
+    email: string,
+    yearOfBirth: number,
+    primaryGoal: string,
+    levelOfFitnessExperience: string,
+    isAdmin: boolean
+}
