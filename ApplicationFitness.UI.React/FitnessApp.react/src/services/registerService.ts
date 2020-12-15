@@ -7,7 +7,6 @@ const registerPath = 'Account/';
 http.setToken(authService.token());
 async function register(registerUser:RegisterUser): Promise<UserResponse>{
     const {data} = await http.post(`${registerPath}register`, registerUser);
-    console.log(data);
     const token = (data as UserResponse).token;
     localStorage.setItem('user', JSON.stringify(data));
     localStorage.setItem('token', token);

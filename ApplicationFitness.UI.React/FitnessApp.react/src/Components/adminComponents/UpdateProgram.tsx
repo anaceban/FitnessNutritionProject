@@ -1,13 +1,13 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, makeStyles } from '@material-ui/core';
+import { Box, Button, Container, makeStyles } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import CreateProgramSchedule from '../../services/interfaces/CreateProgramSchedule';
 import programSchService from '../../services/programSchService';
 import { paths } from '../../links/NavbarLinks';
 import { useHistory } from 'react-router-dom';
-import {updateProgramSchedule} from '../adminComponents/Shedules';
+import { updateProgramSchedule } from '../adminComponents/Shedules';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,10 +25,11 @@ export default function AddNewProgram() {
   const { register, handleSubmit } = useForm<CreateProgramSchedule>({});
   const history = useHistory();
   const onSubmit = async (data: CreateProgramSchedule) => {
-    var result = await programSchService.updateProgram(data,updateProgramSchedule.id);
-    if(result.isSucces)
-        console.log("Successfully");
+    await programSchService.updateProgram(data, updateProgramSchedule.id);
     history.push(paths.Programs);
+  }
+  const GoBack = () => {
+    history.goBack();
   }
   return (
     <Container className={classes.root}>
@@ -98,6 +99,8 @@ export default function AddNewProgram() {
             </Button>
           </Grid>
         </Grid>
+        <Box lineHeight={2} m={3}></Box>
+        <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
       </form>
     </Container>
   );

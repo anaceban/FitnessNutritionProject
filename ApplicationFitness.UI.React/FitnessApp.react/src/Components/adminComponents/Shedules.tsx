@@ -71,13 +71,11 @@ export default function DataTable() {
         const _filterModel = { ...filterModel };
         _filterModel.page = 0;
         _filterModel.term = searchTerm;
-        console.log(_filterModel);
         await fetchPrograms(_filterModel);
     }
     
     const handleChangePage = async (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
         const _filterModel = { ...filterModel };
-        console.log(newPage);
         _filterModel.page = newPage;
         await fetchPrograms(_filterModel);
     };
@@ -97,7 +95,6 @@ export default function DataTable() {
         programSchService.deleteProgram(idDelete).then(() => setPrograms(programs.filter((program: { id: number; }) => program.id !== idDelete)));
     };
     async function updateProgram(program: CreateProgramSchedule) {
-        console.log(program);
         updateProgramSchedule = program;
         history.push(paths.UpdateProgram);
     };
@@ -105,7 +102,6 @@ export default function DataTable() {
         const _filterModel = { ...filterModel };
         _filterModel.sortedField = column.field;
         _filterModel.sortAsc = column.field !== filterModel.sortedField ? true : !filterModel.sortAsc;
-        console.log(_filterModel);
         await fetchPrograms(_filterModel);
     }
 

@@ -8,7 +8,7 @@ namespace WebApi.Dtos
 {
     public class AddDishDay
     {
-        public int ScheduleId { get; set; }
+        public string TypeName { get; set; }
         public string DayName { get; set; }
         public string TrainingLink { get; set; }
         public List<int> dishes { get; set; }

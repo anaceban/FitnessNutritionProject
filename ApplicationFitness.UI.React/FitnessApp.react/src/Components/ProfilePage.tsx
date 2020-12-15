@@ -63,7 +63,6 @@ export default function CreateProfilePage() {
   });
 
   const onSubmit = async (data: CreatePage) => {
-    console.log(data);
     await profilePageService.createPage(data);
     history.push(paths.UserProgramSchedule);
   }

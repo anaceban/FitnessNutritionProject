@@ -79,8 +79,8 @@ export const navLinks = [
 
 ] as NavLinkProps[];
 export const links = [
-    { title: `SignUp`, path: paths.SignUp, componentx: SignUp },
-    { title: 'SignIn', path: paths.SignIn, componentx: SignInSide },
+    { title: `Sign Up`, path: paths.SignUp, componentx: SignUp },
+    { title: 'Sign In', path: paths.SignIn, componentx: SignInSide },
     { title: 'Advices', path: paths.Advices, componentx: Advices }
 ] as NavLinkProps[];
 export const linksSide = [

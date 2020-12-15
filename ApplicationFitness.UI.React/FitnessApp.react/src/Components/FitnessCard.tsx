@@ -17,7 +17,7 @@ import { getTypes } from '../services/typeService';
 import ProgramType from '../services/interfaces/Type';
 import { useHistory } from 'react-router-dom';
 import { paths } from '../links/NavbarLinks';
-import { ButtonBase } from '@material-ui/core';
+import { Box, ButtonBase, Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -36,12 +36,20 @@ const useStyles = makeStyles((theme) => ({
 
     },
     card: {
-        height: '80%',
+        minHeight: 380,
+        maxHeight: 381,
+        minWidth: 200,
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    cardSide: {
+        minWidth: 400,
+        maxWidth: 401,
         display: 'flex',
         flexDirection: 'column',
     },
     cardMedia: {
-        paddingTop: '90%',
+        paddingTop: '100%',
     },
     cardContent: {
         flexGrow: 1,
@@ -56,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export var getId:number;
+export var getId: number;
 export default function Album() {
     const classes = useStyles();
     const history = useHistory();
@@ -68,7 +76,7 @@ export default function Album() {
         const data = await getTypes();
         setTypes(data);
     }
-    async function getProgram(id:number) {
+    async function getProgram(id: number) {
         history.push(`/typeProgram/${id}`);
     }
     return (
@@ -80,34 +88,69 @@ export default function Album() {
                 <Container className={classes.cardGrid}>
                     {/* End hero unit */}
                     <h1 className={classes.header}>Program Types</h1>
+                    <Hidden smDown>
+                        <Grid container spacing={4}>
+
+                            {types.map(({ id, name }) => (
+                                <Grid item key={name} xs={12} sm={6} md={6}>
+                                    <ButtonBase onClick={() => getProgram(id)}>
+                                        <Card className={classes.card} style={{ backgroundColor: '#004752' }} >
+                                            <CardMedia
+                                                className={classes.cardMedia}
+                                                image='https://www.health.harvard.edu/media/content/images/L1703_Healthy_TSk-512686460.jpg'
+                                                title="Image title"
+
+                                            />
+                                            <CardContent className={classes.cardContent}>
+                                                <Typography gutterBottom variant="h5" component="h2" style={{ color: "white" }}>
+                                                    Type
+                    </Typography>
+                                                <Typography style={{ color: "white" }}>
+                                                    {name}
+                                                </Typography>
+
+                                            </CardContent>
+
+                                        </Card>
+
+                                    </ButtonBase>
+                                </Grid>
+                            ))}
+
+                        </Grid>
+                    </Hidden>
+                </Container>
+                <Hidden mdUp>
                     <Grid container spacing={4}>
 
                         {types.map(({ id, name }) => (
-                            <Grid item key={name} xs={12} sm={6} md={4}>
+                            <Grid item key={name} xs={12} sm={6} md={6}>
                                 <ButtonBase onClick={() => getProgram(id)}>
-                                <Card className={classes.card} style={{backgroundColor:'#004752'}} >
-                                <CardMedia
-                                    className={classes.cardMedia}
-                                    image='https://www.health.harvard.edu/media/content/images/L1703_Healthy_TSk-512686460.jpg'
-                                    title="Image title"
-                                    
-                                />
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom variant="h5" component="h2" style={{color:"white"}}>
-                                            Type 
-                    </Typography>
-                                        <Typography style={{color:"white"}}>
-                                            {name}
-                                        </Typography>
-                                        
-                                    </CardContent>
-                                </Card>
+                                    <Card className={classes.cardSide} style={{ backgroundColor: '#004752' }} >
+                                        <CardMedia
+                                            className={classes.cardMedia}
+                                            image='https://www.health.harvard.edu/media/content/images/L1703_Healthy_TSk-512686460.jpg'
+                                            title="Image title"
+
+                                        />
+                                        <CardContent className={classes.cardContent}>
+                                            <Typography gutterBottom variant="h5" component="h2" style={{ color: "white" }}>
+                                                Type
+</Typography>
+                                            <Typography style={{ color: "white" }}>
+                                                {name}
+                                            </Typography>
+
+                                        </CardContent>
+
+                                    </Card>
+
                                 </ButtonBase>
                             </Grid>
                         ))}
 
                     </Grid>
-                </Container>
+                </Hidden>
             </main>
         </React.Fragment>
     );

@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
 export default function TypeSchedule() {
 
     const classes = useStyles();
-    const { id }:any = useParams();
+    const { id }: any = useParams();
     const [program, setProgram] = useState({} as ProgramSchedule);
     const [reviews, setReviews] = useState([] as GetReview[])
-    
+
     const history = useHistory();
     useEffect(() => {
         fetchProgram();
@@ -68,7 +68,7 @@ export default function TypeSchedule() {
         setProgram(data);
         const result = await getReviews(id as Number);
         setReviews(result);
-        
+
     }
 
     return (
@@ -85,7 +85,7 @@ export default function TypeSchedule() {
                                     <div className={classes.cardDetails}>
                                         <CardContent>
                                             <Typography component="h2" variant="h5" style={{ color: 'white' }}>
-                                                Level of fitness -{program.fitnessProgramName}
+                                                Level of fitness: {program.fitnessProgramName}
                                                 <Typography variant="subtitle1" color="textSecondary" style={{ color: 'white' }}>
                                                     {program.fitnessProgramDescription}
                                                 </Typography>
@@ -96,7 +96,7 @@ export default function TypeSchedule() {
                                     <CardMedia className={classes.cardMedia} image={'https://papers.co/wallpaper/papers.co-mz21-food-style-eat-dish-41-iphone-wallpaper.jpg'} title={"Fitness image"} />
                                     <div className={classes.cardDetails}>
                                         <CardContent>
-                                            <Typography component="h2" variant="h5" style={{ color: 'white' }}>Primary Goal -{program.nutritionProgramName}
+                                            <Typography component="h2" variant="h5" style={{ color: 'white' }}>Primary Goal: {program.nutritionProgramName}
                                                 <Typography variant="subtitle1" color="textSecondary" style={{ color: 'white' }}> {program.nutritionProgramDescription}
                                                 </Typography>
                                             </Typography>
@@ -110,7 +110,12 @@ export default function TypeSchedule() {
                         <Hidden mdUp>
                             <ScheduleInfoSide></ScheduleInfoSide>
                         </Hidden>
-                        <Typography style={{ color: 'black', fontSize: 24 }}>Reviews about program</Typography>
+                        <Box margin={2}></Box>
+                        <Typography variant="h4" component="h4" style={{
+                                    backgroundImage: 'url("https://cms-assets.tutsplus.com/uploads/users/412/posts/30733/image/12-fog-smoke.jpg")',
+                                    color: 'white',
+                                    justifyContent: 'left'
+                                }}>Reviews about program</Typography>
                         {reviews.map(({ firstName, lastName, comment, ratingMark }) => (
                             <Paper
                                 style={{
@@ -118,7 +123,7 @@ export default function TypeSchedule() {
                                     color: 'white',
                                     justifyContent: 'left'
                                 }} elevation={10}>
-                                <Divider variant="middle" /><Divider variant="middle" /><Divider variant="middle" />
+                                <Box margin={3}></Box>
                                 <Typography style={{ display: "flex", justifyContent: 'left', paddingLeft: 10 }}>
                                     <AccountCircleIcon htmlColor={"white"}></AccountCircleIcon> {firstName} {lastName}
                                 </Typography >
@@ -133,7 +138,7 @@ export default function TypeSchedule() {
                                 <Typography style={{ display: "flex", justifyContent: 'left', paddingLeft: 10 }}>
                                     {comment}
                                 </Typography>
-                                <Divider variant="middle" />
+                                <Box margin={3}></Box>
                             </Paper>
                         ))}
                     </Grid>

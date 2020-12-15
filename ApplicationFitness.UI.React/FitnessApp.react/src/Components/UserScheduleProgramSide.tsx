@@ -88,6 +88,7 @@ export default function UserProgramSchedule() {
                     </CardContent>
                 </div>
             </Card>
+            <Box lineHeight={10} m={4}></Box>
             <Card className={classes.card}>
                 <CardMedia className={classes.cardMedia} image={'https://papers.co/wallpaper/papers.co-mz21-food-style-eat-dish-41-iphone-wallpaper.jpg'} title={"Fitness image"} />
                 <div className={classes.cardDetails}>

@@ -7,7 +7,6 @@ const schedulePath = 'Account/';
 
 export async function getProgram() : Promise<ProgramSchedule>{
     const { data } = await http.get(`${schedulePath}program`);
-    console.log(data);
     return data;
 }
 

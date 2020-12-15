@@ -1,12 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, makeStyles } from '@material-ui/core';
+import { Box, Button, Container, makeStyles } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { paths } from '../../links/NavbarLinks';
 import { useHistory } from 'react-router-dom';
 import Type from '../../services/interfaces/ProgramType';
-import {createType} from '../../services/typeService';
+import { createType } from '../../services/typeService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,11 +22,11 @@ export default function AddNewProgramType() {
   const { register, handleSubmit } = useForm<Type>({});
   const history = useHistory();
   const onSubmit = async (data: Type) => {
-    var result = await createType(data);
-    console.log(data);
-    if(result.isSucces)
-        console.log("Successfully");
+    await createType(data);
     history.push(paths.Types);
+  }
+  const GoBack = () => {
+    history.goBack();
   }
   return (
     <Container className={classes.root}>
@@ -50,6 +50,8 @@ export default function AddNewProgramType() {
             <Button variant="contained" color="primary" type="submit" >
               Add ProgramType
             </Button>
+            <Box lineHeight={2} m={3}></Box>
+            <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
           </Grid>
         </Grid>
       </form>

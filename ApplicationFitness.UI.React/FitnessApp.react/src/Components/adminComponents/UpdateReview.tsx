@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, makeStyles } from '@material-ui/core';
+import { Box, Button, Container, makeStyles } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { paths } from '../../links/NavbarLinks';
 import { useHistory } from 'react-router-dom';
@@ -27,6 +27,9 @@ export default function Update() {
     await updateReview(updateReviewItem.id, data);
     history.push(paths.AllReviews);
   }
+  const GoBack = () => {
+    history.goBack();
+  }
   return (
     <Container className={classes.root}>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -47,10 +50,12 @@ export default function Update() {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} className={classes.gridContent}>
-            <Button variant="contained" color="primary" type="submit" >
+            <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: '#004752', color: 'white' }}>
               Update Comment
       </Button>
           </Grid>
+          <Box lineHeight={2} m={3}></Box>
+            <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
         </Grid>
       </form>
     </Container>

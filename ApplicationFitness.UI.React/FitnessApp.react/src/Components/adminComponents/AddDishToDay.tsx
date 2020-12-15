@@ -110,7 +110,8 @@ export default function AddNewDish() {
                     </Grid>
                 </Grid>
             </form>
-            <Button onClick={GoBack}><ArrowBackIcon></ArrowBackIcon></Button>
+            <Box lineHeight={2} m={3}></Box>
+            <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
         </Container>
     );
 }

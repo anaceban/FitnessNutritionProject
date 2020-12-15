@@ -53,7 +53,6 @@ export default function SimpleAccordion() {
     const fetchData = async () => {
         const programDishes = await getDishesForProgram();
         setDishes(programDishes);
-        console.log(programDishes);
     }
 
     return (

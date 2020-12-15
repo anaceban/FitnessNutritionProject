@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardContent, Container, Grid, Typography } from '@material-ui/core';
+import { Box, Card, CardActionArea, CardContent, CardMedia, Container, Grid, Typography } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ProgramAdvice from '../services/interfaces/ProgramAdvice';
 import { getAdvices } from '../services/adviceService';
@@ -37,9 +37,13 @@ const useStyles = makeStyles((theme) => ({
         width: 160,
     },
     footer: {
-        marginTop: '15%',
+        marginTop: '5%',
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
+    },
+    cardMedia2: {
+        paddingTop: '20%',
+        width: '100%'
     },
 }));
 
@@ -57,7 +61,9 @@ export default function Advices() {
     return (
         <div className={classes.root}>
             <div style={{ display: 'flex', justifyContent: "center" }}>
+                
                 <Grid item xs={12} md={6}>
+                    <Box margin={6}></Box>
                     <Typography variant={"h3"} style={{ color: "white", backgroundColor: "black" }}>Fitness&Nutrition Advices</Typography>
                     {advices.map(({ adviceForUser, adviceDesc }) => (
                         <CardActionArea component="a" href="#">

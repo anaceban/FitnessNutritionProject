@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Checkbox, Container, createStyles, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, TablePagination, TextField, Theme } from '@material-ui/core';
+import { Box, Button, Checkbox, Container, createStyles, FormControl, Grid, InputLabel, makeStyles, MenuItem, Paper, Select, TablePagination, TextField, Theme, Typography } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Control, Controller, useForm } from "react-hook-form";
 import dishService from '../services/dishService';
@@ -11,6 +11,9 @@ import { useHistory } from 'react-router-dom';
 import AddDishDialog from '../Components/adminComponents/AddDishToDay';
 import ProgramDay from '../services/interfaces/ProgramDay';
 import { paths } from '../links/NavbarLinks';
+import { toast } from 'react-toastify';
+import { getTypes } from '../services/typeService';
+import ProgramType from '../services/interfaces/Type';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -48,10 +51,9 @@ export default function AddDay() {
     const classes = useStyles();
     const [dishes, setDishes] = useState([] as ProgramDish[]);
     const [dayDishes, setDayDishes] = React.useState<ProgramDish[]>([]);
-    const [scheduleId, setScheduleId] = useState(0);
     const [open, setOpen] = React.useState(false);
     const history = useHistory();
-    const [schedulesIds, setScheduleIds] = useState([]);
+    const [types, setTypes] = useState([] as ProgramType[]);
     const { register, handleSubmit, control } = useForm<AddProgramDay>({});
     useEffect(() => {
         fetchData();
@@ -60,17 +62,13 @@ export default function AddDay() {
     const fetchData = async () => {
         const programDishes = await dishService.getDishes();
         setDishes(programDishes);
-        console.log(programDishes);
-        var ids = await programSchService.getProgramIds();
-        setScheduleIds(ids);
-        console.log(ids);
+        var types = await getTypes();
+        setTypes(types);
     }
     const onSubmit = async (day: AddProgramDay) => {
         day.dishes = dayDishes;
-        console.log(dayDishes);
         console.log(day);
         await createDay(day);
-        console.log(day);
         history.push(paths.Days);
     }
     const GoBack = () => {
@@ -110,62 +108,65 @@ export default function AddDay() {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <InputLabel htmlFor="scheduleId">Schedule Id</InputLabel>
-                            <Controller
-                                as={
+                            <InputLabel htmlFor="typeName">Type Name</InputLabel>
+                                <Controller
+                                    as={
+                                        <Select
+                                            variant="filled"
+                                            fullWidth
+                                            color={"secondary"}
+                                            id="typeName"
+                                            label="typeName"
+                                            name="typeName"
+                                            autoComplete="Type"
+                                        >
+                                            {types.map(({name}) =>
+                                                <MenuItem value={name}> {name} </MenuItem>
+                                            )}
+                                        </Select>
+                                    }
+                                    name="typeName"
+                                    control={control}
+
+                                />
+                            <Grid item xs={12}>
+                                <InputLabel htmlFor="dishes">Dishes</InputLabel>
+                                <FormControl className={classes.formControl}>
                                     <Select
+                                        value={dayDishes}
                                         variant="filled"
                                         fullWidth
+                                        multiple
                                         color={"secondary"}
-                                        id="scheduleId"
-                                        label="Schedule Id"
-                                        name="scheduleId"
-                                        autoComplete="Schedule Id"
+                                        id="dishes"
+                                        label="dishes"
+                                        name="dishes"
+                                        autoComplete="dishes"
+                                        onChange={handleChange}
                                     >
-                                        {schedulesIds.map((scheduleId) =>
-                                            <MenuItem value={scheduleId}> {scheduleId} </MenuItem>
+                                        {dishes.map(({ id, name, typeOfMeal }) =>
+                                            <MenuItem value={id}>
+                                                {typeOfMeal} : <Box marginLeft={1}></Box>
+                                                {name} </MenuItem>
                                         )}
                                     </Select>
-                                }
-                                name="scheduleId"
-                                control={control}
+                                    </FormControl>
 
-                            />
-                            <Grid item xs={12}>
-                            <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="dishes">Dishes</InputLabel>
-                                <Select
-                                    value={dayDishes}
-                                    variant="filled"
-                                    fullWidth
-                                    multiple
-                                    color={"secondary"}
-                                    id="dishes"
-                                    label="dishes"
-                                    name="dishes"
-                                    autoComplete="dishes"
-                                    onChange={handleChange}
-                                >
-                                    {dishes.map(({ id, name }) =>
-                                        <MenuItem value={id}> {name} </MenuItem>
-                                    )}
-                                </Select>
-                            </FormControl>
+                            </Grid>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12} md={12} className={classes.gridContent}>
+                                <Box lineHeight={2} m={3}></Box>
+                                <Button variant="contained" style={{ backgroundColor: '#004752', color: 'white' }} type="submit" >
+                                    Add Program Day
+      </Button>
                             </Grid>
                         </Grid>
-
-                        <Grid item xs={12} sm={12} md={12} className={classes.gridContent}>
-                            <Box lineHeight={2} m={3}></Box>
-                            <Button variant="contained" style={{ backgroundColor: '#004752', color: 'white' }} type="submit" >
-                                Add Program Day
-      </Button>
-                        </Grid>
-                    </Grid>
                 </form>
             </div>
-            <Box lineHeight={2} m={3}></Box>
-            <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
-        </Container>
+                <Box lineHeight={2} m={3}></Box>
+                <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
+        </Container >
     );
 }
 

@@ -86,8 +86,6 @@ namespace WebApi.Services
             {
                 return null;
             }
-            else if (dto.FitnessProgramName != programSchedule.FitnessProgramName)
-                return null;
 
             programSchedule.FitnessProgramName = dto.FitnessProgramName;
             programSchedule.NutritionProgramName = dto.NutritionProgramName;

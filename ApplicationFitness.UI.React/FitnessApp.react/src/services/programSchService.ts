@@ -6,14 +6,11 @@ import ProgramSchedule from './interfaces/ProgramSchedule';
 const schedulePath = 'ProgramSchedule/';
 
 async function getSorted(filterModel:FilterModel):Promise<PagedCollectionResponse>{
-    console.log(`Sended Model page ${filterModel.page}`)
     const {data} = await http.get(`${schedulePath}getAll?Page=${filterModel.page}&Limit=${filterModel.limit}&Term=${filterModel.term}&SortedField=${filterModel.sortedField}&SortAsc=${filterModel.sortAsc}`);
-    console.log(data);
     return data;
 }
 async function createSchedule(schedule:CreateProgramSchedule){
     const {data} = await http.post(`${schedulePath}create`, schedule);
-    console.log(data);
     return data;
 }
 async function deleteProgram(id:Number) {

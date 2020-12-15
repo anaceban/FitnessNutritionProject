@@ -77,13 +77,11 @@ export default function Reviews() {
         const _filterModel = { ...filterModel };
         _filterModel.page = 0;
         _filterModel.term = searchTerm;
-        console.log(_filterModel);
         await fetchReviews(_filterModel);
     }
-    const emptyRows = filterModel.limit - Math.min(filterModel.limit, reviews.length - filterModel.page * filterModel.limit);
+    
     const handleChangePage = async (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
         const _filterModel = { ...filterModel };
-        console.log(newPage);
         _filterModel.page = newPage;
         await fetchReviews(_filterModel);
     };
@@ -107,7 +105,6 @@ export default function Reviews() {
         const _filterModel = { ...filterModel };
         _filterModel.sortedField = column.field;
         _filterModel.sortAsc = column.field !== filterModel.sortedField ? true : !filterModel.sortAsc;
-        console.log(_filterModel);
         await fetchReviews(_filterModel);
     }
 
@@ -166,12 +163,6 @@ export default function Reviews() {
                                     </Button></TableCell>
                             </TableRow>
 
-                        )}
-
-                        {emptyRows > 0 && (
-                            <TableRow style={{ height: 53 * emptyRows }}>
-                                <TableCell colSpan={6} />
-                            </TableRow>
                         )}
                     </TableBody>
                 </Table>

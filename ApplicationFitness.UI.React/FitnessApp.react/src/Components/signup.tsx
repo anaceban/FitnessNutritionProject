@@ -28,7 +28,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      FitnessNutrition App
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -81,7 +81,6 @@ export default function SignUp() {
   const { register, handleSubmit, errors} = useForm<RegisterUser>({ resolver: yupResolver(schema)});
   const userContext = useContext(UserContext);
   const onSubmit = async (data: RegisterUser) => {
-    console.log(data);
     var result = await registerService.register(data);
     if(result.isSucces){
       userContext.onLogin(result);
@@ -90,7 +89,7 @@ export default function SignUp() {
       
     else if (!result.isSucces) 
       toast.error('User with such email already exists')
-    console.log(result);
+      localStorage.clear();
   }
     
   return (
@@ -168,12 +167,6 @@ export default function SignUp() {
               />
             </Grid>
             {errors.passwordConfirm && <div>Passwords are not the same</div>}
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
           <Button
             type="submit"

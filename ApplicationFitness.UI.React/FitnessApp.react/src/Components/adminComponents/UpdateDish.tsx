@@ -1,13 +1,13 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, makeStyles } from '@material-ui/core';
+import { Box, Button, Container, makeStyles } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import Dish from '../../services/interfaces/Dish';
 import dishService from '../../services/dishService';
 import { paths } from '../../links/NavbarLinks';
 import { useHistory } from 'react-router-dom';
-import {updateItem} from '../../Components/adminComponents/Dish';
+import { updateItem } from '../../Components/adminComponents/Dish';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +26,9 @@ export default function UpdateDish() {
   const onSubmit = async (data: Dish) => {
     await dishService.updateDish(data, updateItem.id);
     history.push(paths.Dishes);
+  }
+  const GoBack = () => {
+    history.goBack();
   }
   return (
     <Container className={classes.root}>
@@ -59,9 +62,11 @@ export default function UpdateDish() {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} className={classes.gridContent}>
-            <Button variant="contained" color="primary" type="submit" >
+            <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: '#004752', color: 'white' }}>
               Update Dish
       </Button>
+            <Box lineHeight={2} m={3}></Box>
+            <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
           </Grid>
         </Grid>
       </form>

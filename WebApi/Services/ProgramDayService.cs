@@ -38,11 +38,12 @@ namespace WebApi.Services
 
         public ProgramDay AddNewProgramDay(AddDishDay dto)
         {
+            var type = _programTypeService.GetProgramByName(dto.TypeName);
             var day = new ProgramDay
             {
                 Name = dto.DayName,
                 TrainingLink = dto.TrainingLink,
-                ScheduleId = dto.ScheduleId
+                ScheduleId = type.ProgramScheduleId
             };
             _repository.Add(day);
 

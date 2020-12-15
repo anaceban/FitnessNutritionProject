@@ -20,7 +20,8 @@ import { Button } from '@material-ui/core';
 import SignOut from '../Components/SignOut';
 import authService from '../services/authService';
 import Link from '@material-ui/core/Link';
-
+import { FitnessCenterOutlined, Home } from '@material-ui/icons';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        backgroundColor: 'rgb(2,0,36)', 
+        backgroundColor: 'rgb(2,0,36)',
         background: 'linear-gradient(90deg, rgba(57,117,120,1) 0%, rgba(0,0,0,0.7287289915966386) 40%, rgba(0,78,74,1) 100%)'
     },
     appBarShift: {
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
-        backgroundColor: 'rgb(2,0,36)', 
+        backgroundColor: 'rgb(2,0,36)',
         background: 'linear-gradient(90deg, rgba(57,117,120,1) 0%, rgba(0,0,0,0.7287289915966386) 40%, rgba(0,78,74,1) 100%)'
     },
     drawerHeader: {
@@ -99,9 +100,13 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         color: 'white',
-        
-        
+
+
     },
+    homeButton: {
+        color: 'white',
+    },
+
 }));
 export default function SideBar() {
     const classes = useStyles();
@@ -109,14 +114,8 @@ export default function SideBar() {
     const [open, setOpen] = React.useState(false);
     const [openLog, setOpenLog] = React.useState(false);
     const userContext = useContext(UserContext);
-    const {isAdmin, token} = userContext.user;
+    const { isAdmin, token } = userContext.user;
     const history = useHistory();
-    useEffect(() => {
-        if (open === false) {
-            console.log("closed");
-        }
-        else console.log("open");
-    })
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -170,11 +169,21 @@ export default function SideBar() {
                 >
                     <div className={classes.drawerHeader}>
                         <IconButton onClick={handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon htmlColor={"white"}/> : <ChevronRightIcon />}
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon htmlColor={"white"} /> : <ChevronRightIcon />}
                         </IconButton>
-                        {userContext.user.token && <Button onClick={() =>{setOpenLog(true)}} className={classes.button} variant="outlined">
-                        SignOut
-                        </Button> }
+                        <IconButton
+                            aria-label="open drawer"
+                            edge="start"
+
+                        >
+                            {!userContext.user.isSucces && <Link href={paths.HomePage} className={classes.homeButton}><Home fontSize="large" color='action' /></Link>}
+                            {userContext.user.token && !userContext.user.isAdmin && <Link href={paths.HomePage} className={classes.homeButton}><FitnessCenterOutlined /><FastfoodIcon></FastfoodIcon></Link>}
+                            {userContext.user.isAdmin && <Link href={paths.HomePage} className={classes.homeButton}><Home fontSize="large" color='action' /></Link>}
+                        </IconButton>
+                        {userContext.user.token && <Button onClick={() => { setOpenLog(true) }} className={classes.button} variant="outlined">
+                            SignOut
+                        </Button>}
+
                     </div>
                     <Divider />
                     <List component="nav">
@@ -203,7 +212,7 @@ export default function SideBar() {
                     </List>
                 </Drawer>
             </div>
-            <SignOut open={openLog} logout={onSingout} cancel={onCancel}/>
+            <SignOut open={openLog} logout={onSingout} cancel={onCancel} />
         </Router >
 
     );

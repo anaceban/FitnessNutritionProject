@@ -1,8 +1,9 @@
 import ProgramDish from '../interfaces/Dish';
+import ProgramType from './Type';
 
 export interface AddProgramDay {
     dayName: string,
     trainingLink: string,
-    scheduleId: number,
+    typeName: string,
     dishes: ProgramDish []
 }

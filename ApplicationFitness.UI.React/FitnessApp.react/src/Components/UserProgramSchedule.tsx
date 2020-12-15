@@ -16,7 +16,7 @@ import UserProgramScheduleSide from '../Components/UserScheduleProgramSide';
 
 const useStyles = makeStyles((theme) => ({
     div: {
-        marginTop: theme.spacing(10),
+        marginTop: theme.spacing(8),
     },
     root: {
         width: '100%'
@@ -50,6 +50,11 @@ const useStyles = makeStyles((theme) => ({
     cardMedia: {
         width: 160,
     },
+    footer: {
+        marginTop: '5%',
+        backgroundColor: "#004752",
+        color:"white"
+    },
 }));
 
 export var programId: number;
@@ -75,8 +80,8 @@ export default function UserProgramSchedule() {
 
     return (
         <div className={classes.div}>
-            <div>
-                <Typography variant="h3" component="h3" style={{ color: '#004752' }}><FitnessCenterIcon fontSize={"large"}></FitnessCenterIcon>Fitness&Nutrition Program Schedule</Typography>
+            <div >
+                <Typography variant="h3" component="h3" style={{ color: '#004752'}}>Fitness&Nutrition Program Schedule</Typography>
                 <div style={{ display: 'flex', justifyContent: "center" }}>
                     <Grid item xs={12} md={6}>
                         <CardActionArea component="a" href="#">
@@ -108,9 +113,13 @@ export default function UserProgramSchedule() {
                             </Hidden>
                         </CardActionArea>
                         <Hidden mdUp>
+                        
                             <UserProgramScheduleSide></UserProgramScheduleSide>
                         </Hidden>
-                        <div><UserData></UserData></div>
+                        <div> 
+                        <Box lineHeight={10} m={4}></Box>
+                            <UserData></UserData></div>
+                            <Box lineHeight={10} m={4}></Box>
                         <SimpleAccordion></SimpleAccordion>
                     </Grid>
                 </div>
@@ -123,6 +132,12 @@ export default function UserProgramSchedule() {
                 Add Review
       </Button>
             <AddReview open={open} cancel={onCancel} onAdd={() => setOpen(false)}></AddReview>
+            <Box lineHeight={10} m={4}></Box>
+            <footer className={classes.footer}>
+                <Container maxWidth="sm">
+                    <Typography variant="body1">Nutrition&Fitness  {new Date().getFullYear()}</Typography>
+                </Container>
+            </footer>
         </div>
 
     );

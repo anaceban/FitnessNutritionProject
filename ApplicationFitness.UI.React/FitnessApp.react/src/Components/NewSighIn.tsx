@@ -28,7 +28,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        FitnessNutrition App
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -81,7 +81,6 @@ export default function SignInSide() {
   const userContext = useContext(UserContext);
   const { register, handleSubmit } = useForm<LoginUser>({ resolver: yupResolver(schema) });
   const onSubmit = async (data: LoginUser) => {
-    console.log(data);
     const response = await authService.login(data);
     if(response.isSucces)
       {
@@ -89,7 +88,6 @@ export default function SignInSide() {
         return history.replace(paths.HomePage);
       }
       
-    console.log(response);
     toast.error('Wrong password or email');
   }
 

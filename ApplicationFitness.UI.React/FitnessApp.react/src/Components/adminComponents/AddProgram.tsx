@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, makeStyles } from '@material-ui/core';
+import { Box, Button, Container, makeStyles } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import CreateProgramSchedule from '../../services/interfaces/CreateProgramSchedule';
 import programSchService from '../../services/programSchService';
@@ -22,11 +22,11 @@ export default function AddNewProgram() {
   const { register, handleSubmit } = useForm<CreateProgramSchedule>({});
   const history = useHistory();
   const onSubmit = async (data: CreateProgramSchedule) => {
-    var result = await programSchService.createSchedule(data);
-    console.log(data);
-    if(result.isSucces)
-        console.log("Successfully");
+    await programSchService.createSchedule(data);
     history.push(paths.Programs);
+  }
+  const GoBack = () => {
+    history.goBack();
   }
   return (
     <Container className={classes.root}>
@@ -102,6 +102,8 @@ export default function AddNewProgram() {
             <Button variant="contained" type="submit" style={{ backgroundColor: '#004752', color: 'white' }} >
               Add Program
             </Button>
+            <Box lineHeight={2} m={3}></Box>
+            <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
           </Grid>
         </Grid>
       </form>

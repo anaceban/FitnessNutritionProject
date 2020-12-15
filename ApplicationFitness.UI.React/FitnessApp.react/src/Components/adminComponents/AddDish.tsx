@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, InputLabel, makeStyles, MenuItem, Select } from '@material-ui/core';
+import { Box, Button, Container, InputLabel, makeStyles, MenuItem, Select } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import Dish from '../../services/interfaces/Dish';
 import dishService from '../../services/dishService';
@@ -25,9 +25,7 @@ export default function AddNewDish() {
     history.goBack();
   }
   const onSubmit = async (data: Dish) => {
-    var result = await dishService.createDish(data);
-    if (result.isSucces)
-      console.log("Successfully");
+    await dishService.createDish(data);
     history.goBack();
   }
   return (
@@ -39,36 +37,37 @@ export default function AddNewDish() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Grid item xs={12}>
-            <TextField
-              required
-              inputRef={register}
-              id="name"
-              name="name"
-              label="Name"
-              fullWidth
-              autoComplete="Name"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              inputRef={register}
-              id="typeOfMeal"
-              name="typeOfMeal"
-              label="Type Of Meal"
-              fullWidth
-              autoComplete="Type Of Meal"
-            />
-          </Grid>
+              <TextField
+                required
+                inputRef={register}
+                id="name"
+                name="name"
+                label="Name"
+                fullWidth
+                autoComplete="Name"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                inputRef={register}
+                id="typeOfMeal"
+                name="typeOfMeal"
+                label="Type Of Meal"
+                fullWidth
+                autoComplete="Type Of Meal"
+              />
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={12} md={12} className={classes.gridContent}>
-            <Button variant="contained" color="primary" type="submit" >
+            <Button variant="contained" color="primary" type="submit" style={{ backgroundColor: '#004752', color: 'white' }} >
               Add Program Dish
       </Button>
           </Grid>
         </Grid>
       </form>
-      <Button onClick={GoBack}><ArrowBackIcon></ArrowBackIcon></Button>
+      <Box lineHeight={2} m={3}></Box>
+      <Button onClick={GoBack} style={{ backgroundColor: '#004752', color: 'white' }}>Go Back</Button>
     </Container>
   );
 }

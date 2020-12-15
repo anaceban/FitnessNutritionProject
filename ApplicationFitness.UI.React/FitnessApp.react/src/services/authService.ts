@@ -6,7 +6,6 @@ const authPath = 'Account/';
 http.setToken(token());
 async function login(loginUser: LoginUser) : Promise<UserResponse> {
     const { data } = await http.post(`${authPath}login`, loginUser);
-    console.log(data);
     const token = (data as UserResponse).token;
     localStorage.setItem('user', JSON.stringify(data));
     localStorage.setItem('token', token);

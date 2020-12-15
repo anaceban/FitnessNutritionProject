@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ArrowRight, Home } from "@material-ui/icons";
+import { ArrowRight, FitnessCenterOutlined, Home } from "@material-ui/icons";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { AppBar, Toolbar, List, Typography, IconButton, Hidden, ListItem, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@material-ui/core/';
@@ -11,11 +11,12 @@ import authService from '../services/authService';
 import UserContext from '../Context/UserContext';
 import SignOut from '../Components/SignOut';
 import Link from '@material-ui/core/Link';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
         backgroundColor: 'rgb(2,0,36)', 
-        background: 'linear-gradient(90deg, rgba(57,117,120,1) 0%, rgba(0,0,0,0.7287289915966386) 40%, rgba(0,78,74,1) 100%)'
+        background: 'linear-gradient(90deg, rgba(57,117,120,1) 0%, rgba(0,0,0,0.7287289915966386) 40%, rgba(0,78,74,1) 100%)',
     },
     menuButton: {
         marginRight: theme.spacing(2)
@@ -25,18 +26,17 @@ const useStyles = makeStyles((theme) => ({
     },
     drawer: {
         flexShrink: 0,
-        
     },
     navDisplayFlex: {
         display: "flex",
-        justifyContent: "space-around"
-        
+        justifyContent: "space-around",
+        minWidth: "15%"
     },
     linkText: {
         textDecoration: `none`,
         textTransform: `uppercase`,
         color: `primary`,
-        display: "flex"
+        display: "flex",
     },
     button: {
         color: 'white',
@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
     },
     listItem:{
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+        width:"auto"
     }
 }));
 
@@ -79,7 +80,6 @@ export default function PersistentDrawerLeft() {
 
         setOpen(false);
     };
-    console.log(userContext.user);
     return (
         <div>
             <AppBar
@@ -92,7 +92,9 @@ export default function PersistentDrawerLeft() {
                         edge="start"
                         className={clsx(classes.menuButton)}
                     >
-                        <Link href={paths.HomePage} className={classes.homeButton}><Home fontSize="large" color='action' /></Link>
+                    {!userContext.user.isSucces && <Link href={paths.HomePage} className={classes.homeButton}><Home fontSize="large" color='action' /></Link>}
+                    {userContext.user.token && !userContext.user.isAdmin && <Link href={paths.HomePage} className={classes.homeButton}><FitnessCenterOutlined/><FastfoodIcon></FastfoodIcon></Link>}
+                    {userContext.user.isAdmin && <Link href={paths.HomePage} className={classes.homeButton}><Home fontSize="large" color='action' /></Link>}
                     </IconButton>
                     <Hidden smDown>
                         <List

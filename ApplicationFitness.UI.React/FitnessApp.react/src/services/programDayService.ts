@@ -8,22 +8,18 @@ const dayPath = 'Day/';
 
 export default async function createDay(dishDay:AddProgramDay){
     const {data} = await http.post(`${dayPath}addDay`, dishDay);
-    console.log(data);
 return data;
 }
 export async function getDayIds(){
     const {data} = await http.get(`${dayPath}getDayIds`);
-    console.log(data);
 return data;
 }
 export async function createDishDay(dishDay:DayDish){
     const {data} = await http.post(`${dayPath}addDishDay`, dishDay);
-    console.log(data);
 return data;
 }
 export async function getAll(filterModel:FilterModel):Promise<PagedCollectionResponse>{
     const {data} = await http.get(`${dayPath}allDays?Page=${filterModel.page}&Limit=${filterModel.limit}&Term=${filterModel.term}&SortedField=${filterModel.sortedField}&SortAsc=${filterModel.sortAsc}`);
-    console.log(data);
     return data;
 }
 export async function deleteDay(id:number) {

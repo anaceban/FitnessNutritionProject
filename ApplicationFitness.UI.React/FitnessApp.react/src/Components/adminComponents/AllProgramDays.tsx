@@ -80,7 +80,6 @@ export default function BasicTable() {
 
     const fetchDays = async (filterModel: FilterModel) => {
         const response = await getAll(filterModel);
-        console.log(response);
         if (response) {
             setFilterModel(filterModel);
             setItemsCount(response.totalItemsCount);
@@ -91,13 +90,11 @@ export default function BasicTable() {
         const _filterModel = { ...filterModel };
         _filterModel.page = 0;
         _filterModel.term = searchTerm;
-        console.log(_filterModel);
         await fetchDays(_filterModel);
     }
 
     const handleChangePage = async (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
         const _filterModel = { ...filterModel };
-        console.log(newPage);
         _filterModel.page = newPage;
         await fetchDays(_filterModel);
     };
@@ -123,7 +120,6 @@ export default function BasicTable() {
         const _filterModel = { ...filterModel };
         _filterModel.sortedField = column.field;
         _filterModel.sortAsc = column.field !== filterModel.sortedField ? true : !filterModel.sortAsc;
-        console.log(_filterModel);
         await fetchDays(_filterModel);
     }
     return (
